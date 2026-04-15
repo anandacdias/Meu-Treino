@@ -1,28 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Meu Treino</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Treino</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #fff5f7;
+  padding: 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #e91e63;
+}
+
+.day {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.exercise {
+  margin: 8px 0;
+}
+
+button {
+  background: #e91e63;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+</style>
 </head>
 
-<body style="font-family:sans-serif; padding:20px;">
-  <h2>💖 Meu Treino</h2>
+<body>
 
-  <p>Peito e Deltoide</p>
-  <ul>
-    <li>Voador - 4x15</li>
-    <li>Supino Inclinado - 4x8-12</li>
-    <li>Supino Reto - 3x10</li>
-  </ul>
+<h1>💖 Meu Treino</h1>
 
-  <p>Posterior e Glúteo</p>
-  <ul>
-    <li>Mesa Flexora - 4x12</li>
-    <li>Stiff - 4x10</li>
-  </ul>
+<div id="app"></div>
 
-  <p>✔ Cardio: 15min (exceto perna)</p>
+<script>
+
+const treino = [
+{
+nome: "Peito e Deltoide",
+cardio: true,
+exercicios: [
+"Voador 4x15",
+"Supino Inclinado 4x8-12",
+"Supino Reto 3x10",
+"Tríceps Unilateral 4x10",
+"Tríceps Máquina 4x15",
+"Elevação Lateral 5x15"
+]
+},
+{
+nome: "Posterior e Glúteo",
+cardio: false,
+exercicios: [
+"Mesa Flexora 4x12",
+"Cadeira Flexora 3x15",
+"Stiff 4x10",
+"Cadeira Abdutora 4x15",
+"Cadeira Adutora 4x15",
+"Elevação Pélvica 4x12"
+]
+},
+{
+nome: "Costas e Ombro",
+cardio: true,
+exercicios: [
+"Puxada Alta 4x12",
+"Remada Curvada 3x10",
+"Remada Baixa 4x12",
+"Pulldown 3x15",
+"Rosca W 3x10"
+]
+},
+{
+nome: "Quadríceps",
+cardio: false,
+exercicios: [
+"Cadeira Extensora 4x20",
+"Agachamento 4x10",
+"Leg Press 4x15",
+"Afundo 3x10"
+]
+}
+];
+
+const app = document.getElementById("app");
+
+treino.forEach((dia, i) => {
+  const div = document.createElement("div");
+  div.className = "day";
+
+  div.innerHTML = `
+    <h3>${dia.nome}</h3>
+    <p>Cardio: ${dia.cardio ? "15 min" : "Descanso"}</p>
+  `;
+
+  dia.exercicios.forEach((ex, j) => {
+    const exDiv = document.createElement("div");
+    exDiv.className = "exercise";
+
+    let count = 0;
+
+    const btn = document.createElement("button");
+    btn.innerText = "✔";
+    btn.onclick = () => {
+      count++;
+      btn.innerText = "✔ " + count;
+    };
+
+    exDiv.innerHTML = ex;
+    exDiv.appendChild(btn);
+
+    div.appendChild(exDiv);
+  });
+
+  app.appendChild(div);
+});
+
+</script>
 
 </body>
 </html>
